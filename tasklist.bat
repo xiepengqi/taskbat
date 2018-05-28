@@ -19,7 +19,7 @@ set targetlistfile=%home%%targetlist%
 set suffix_batext=.batext
 set currid=0
 set stringtype_flag=d
-set run_split_key=爻
+set run_split_key=@
 
 call :usage
 
@@ -43,8 +43,20 @@ echo genlateststatuslist 	done
 call :genbatext
 echo genbatext 		done
 
+set usercommand=%1 %2 %3 %4 %5 %6 %7 %8 %9
+if not "%usercommand%" == "" (
+	set onlineFlag="true"
+	goto :oneline
+)
+
 :cycle
+if "%onlineFlag%" == "true" (
+	goto :break
+)
+
 set /p usercommand="please type your operate:"
+
+:oneline
 
 call :splitusercommand
 
@@ -150,7 +162,7 @@ goto :cycle
 
 goto :functionend
 :usage
-	set usage_notice=notice^^!: in tasklist_bat.targetlist file, chinese is key in targetlist, and need replace ^^! by "^^^!"
+	set usage_notice=notice^^!: in tasklist_bat.targetlist file, %run_split_key% is key in targetlist, and need replace ^^! by "^^^!"
 	echo Usage: 1,add[content] 2,del[id] 3,upd[id][content] 4,sm[key] 5,fn[id] 6,hd[id] 7,cls 8,sh[key1][key2] 9,q 10,rebuildtasklist
 	echo Super: 1,run[key1][key2] !usage_notice!
 goto :eof
