@@ -44,8 +44,8 @@ call :genbatext
 echo genbatext 		done
 
 set usercommand=%1 %2 %3 %4 %5 %6 %7 %8 %9
-if not "%usercommand%" == "" (
-	set onlineFlag="true"
+if not "%usercommand%" == "        " (
+	set onlineFlag=true
 	goto :oneline
 )
 
