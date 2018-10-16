@@ -151,7 +151,9 @@ if "%usercommand%" == "add" (
 	cls
 	goto :reboot
 ) else if "%usercommand%" == "run" (
-	call :run
+	call :run "run"
+) else if "%usercommand%" == "r" (
+	call :run "r"
 ) else (
 	call :usage
 ) 
@@ -169,7 +171,8 @@ goto :eof
 
 :run
 	set run_count=0
-
+	set run_mod=%1
+	
 	type %targetlistfile%> %tmpfile%
 	for /l %%a in (1,1,9) do if not "!args_%%a!" == "" (
 		findstr/i "!args_%%a!" %tmpfile%> %tmpfile%.tmp
@@ -186,7 +189,12 @@ goto :eof
 	)
 	
 	if !run_count! geq 1 (
-		set /p run_choose="your choose:"
+		if !run_mod! == "r" (
+			set run_choose=1
+		) else (
+			set /p run_choose="your choose:"
+		)
+		
 		for /f "tokens=1,* usebackq" %%a in ('!run_choose!') do (
 			call :stringtype %%a
 			if "!stringtype_flag!" == "d" (
