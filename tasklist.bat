@@ -166,7 +166,7 @@ goto :functionend
 :usage
 	set usage_notice=notice^^!: in tasklist_bat.targetlist file, %run_split_key% is key in targetlist, and need replace ^^! by "^^^!"
 	echo Usage: 1,add[content] 2,del[id] 3,upd[id][content] 4,sm[key] 5,fn[id] 6,hd[id] 7,cls 8,sh[key1][key2] 9,q 10,rebuildtasklist
-	echo Super: 1,run[key1][key2] !usage_notice!
+	echo Super: 1,run[key1][key2] 2,r [key1][key2] !usage_notice!
 goto :eof
 
 :run
