@@ -173,6 +173,11 @@ goto :eof
 	set run_count=0
 	set run_mod=%1
 	
+	if "!args_1!" == "" (
+		echo no target found
+		goto :eof
+	)
+	
 	type %targetlistfile%> %tmpfile%
 	for /l %%a in (1,1,9) do if not "!args_%%a!" == "" (
 		findstr/i "!args_%%a!" %tmpfile%> %tmpfile%.tmp
